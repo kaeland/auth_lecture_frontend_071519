@@ -10,12 +10,12 @@ export default class Profile extends React.Component {
   }
 
   componentDidMount() {
-    debugger
+    // I use the JWT token to access the User's profile via the 'Authorization' header
     fetch("http://localhost:3000/api/v1/profile", {
       headers: {
         "Content-Type": "application/json", 
         "Accept": "application/json", 
-        "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+        "Authorization": `Bearer ${this.props.location.state}`
       }
     }).then(res => res.json())
     .then(data => this.setState({

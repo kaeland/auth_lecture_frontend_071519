@@ -23,10 +23,7 @@ export default class SignupForm extends React.Component {
       })
     }).then(res => res.json())
     .then(data => {
-      localStorage.setItem("jwt", data.jwt)
-      // debugger
-      this.props.history.push("/profile")
-      // debugger
+      this.props.history.push("/profile", data.jwt)
     })
   }
 

@@ -22,11 +22,9 @@ export default class LoginForm extends React.Component {
       })
     }).then(res => res.json())
     .then(data => {
-      localStorage.setItem("jwt", data.jwt)
-      debugger
+      // Here I pass the JWT token to the profile route through the second argument of "history.push(route, [state])"
+      // By passing the JWT token, I can access the token via this.props.location.state inside of the Profile.js component.
       this.props.history.push("/profile", data.jwt)
-      debugger
-      console.log(data)
     })
   }
 
