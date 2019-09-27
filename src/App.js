@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import SignupForm from './components/SignupForm';
+import LoginForm from './components/LoginForm';
+import Profile from './components/Profile';
+import Navigation from './components/Navigation';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    let loggedIn = !!localStorage.jwt
+    // debugger
+    return (
+      <div>
+        <BrowserRouter>
+          <Route component={Navigation} />
+          <Switch>
+            <Route exact path="/" component={SignupForm} />
+            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/profile" render={(props) => (
+              true ? <Profile {...props} /> : <Redirect to="/login"/>
+            )} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
 export default App;
